@@ -6,7 +6,7 @@
 import dizge
 
 ## Giriş
-**dizge**, [diLab](http://dilab.ankara.edu.tr/) DDİ çalışma grubu (Mehmet Umut Mutlu, Nazlıcan Yetimaslan, İlker Atagün) tarafından Python için geliştirilen Türkçe dilbilim analiz aracıdır. Kütüphanenin içeriği, biri Nesne Tabanlı Programlama (OOP) mantığıyla oluşturulmuş `competence` (edinç) adlı, diğeriyse sesbilimsel süreçlerin kural tabanlı (rule-based) olarak işlendiği `tools` (araçlar) adlı iki temel modülden oluşmaktadır. Aracın bu sürümünde (*v0.1.0*) seslem analizi ve fonetik çevriyazı gibi sesbilimsel fonksiyonlar bulunmaktadır.
+**dizge**, [diLab](http://dilab.ankara.edu.tr/) DDİ çalışma grubu (Mehmet Umut Mutlu, Nazlıcan Yetimaslan, İlker Atagün) tarafından Python için geliştirilen Türkçe dilbilim analiz aracıdır. Kütüphanenin içeriği, biri Nesne Tabanlı Programlama (OOP) mantığıyla oluşturulmuş `competence` (edinç) adlı, diğeriyse sesbilimsel süreçlerin kural tabanlı (rule-based) olarak işlendiği `tools` (araçlar) adlı iki temel modülden oluşmaktadır. Aracın bu sürümünde (*v0.1.1*) seslem analizi ve fonetik çevriyazı gibi sesbilimsel fonksiyonlar bulunmaktadır.
 
 **dizge**'nin teorik arkaplanını aşağıdaki kaynaklar oluşturmaktadır:<br/>
 - Ergenç, İ. ve Uzun, İ. P. (2020). *Türkçenin ses dizgesi* (2. baskı). Seçkin Yayınevi.<br/>
