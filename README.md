@@ -1,4 +1,8 @@
 # dizge
+
+![Sürüm](https://img.shields.io/pypi/v/dizge?style=flat-square)
+![Lisans](https://img.shields.io/pypi/l/dizge?style=flat-square)
+
 import dizge
 
 ## Giriş
