@@ -3,10 +3,8 @@
 ![Sürüm](https://img.shields.io/pypi/v/dizge?style=flat-square)
 ![Lisans](https://img.shields.io/pypi/l/dizge?style=flat-square)
 
-import dizge
-
 ## Giriş
-**dizge**, [diLab](http://dilab.ankara.edu.tr/) DDİ çalışma grubu (Mehmet Umut Mutlu, Nazlıcan Yetimaslan, İlker Atagün) tarafından Python için geliştirilen Türkçe dilbilim analiz aracıdır. Kütüphanenin içeriği, biri Nesne Tabanlı Programlama (OOP) mantığıyla oluşturulmuş `competence` (edinç) adlı, diğeriyse sesbilimsel süreçlerin kural tabanlı (rule-based) olarak işlendiği `tools` (araçlar) adlı iki temel modülden oluşmaktadır. Aracın bu sürümünde (*v0.1.1*) seslem analizi ve fonetik çevriyazı gibi sesbilimsel fonksiyonlar bulunmaktadır.
+**dizge**, [Ankara Üniversitesi diLab](http://dilab.ankara.edu.tr/) DDİ çalışma grubu (Mehmet Umut Mutlu, Nazlıcan Yetimaslan, İlker Atagün) tarafından Python için geliştirilen Türkçe dilbilim analiz aracıdır. Kütüphanenin içeriği, biri Nesne Tabanlı Programlama (OOP) mantığıyla oluşturulmuş `competence` (edinç) adlı, diğeriyse sesbilimsel süreçlerin kural tabanlı (rule-based) olarak işlendiği `tools` (araçlar) adlı iki temel modülden oluşmaktadır. Aracın bu sürümünde (*v0.1.2*) seslem analizi ve fonetik çevriyazı gibi sesbilimsel fonksiyonlar bulunmaktadır.
 
 **dizge**'nin teorik arkaplanını aşağıdaki kaynaklar oluşturmaktadır:<br/>
 - Ergenç, İ. ve Uzun, İ. P. (2020). *Türkçenin ses dizgesi* (2. baskı). Seçkin Yayınevi.<br/>
@@ -22,7 +20,7 @@ Mutlu, M. U., Yetimaslan, N. ve Atagün, İ. (2021). dizge. https://github.com/m
 Kütüphanemizi GitHub üzerinden indirip veya pip aracı yardımıyla (`pip install dizge`) sisteminize kurabilirsiniz. Bunun ardından kütüphaneyi aşağıdaki gibi çalıştırabilirsiniz.
 
 ```python
-import dizge
+from dizge import *
 ```
 
 ### Veri Yükleme
@@ -33,16 +31,16 @@ data = open('data/sample.txt', 'r', encoding="utf-8").read()
 
 Veriyi yukarıdaki gibi yükledikten sonra veri içinde kullanacağınız bölümü çözümleme öncesinde standardize etmeniz gerekmektedir. Bunun için kütüphane içindeki `standardize()` fonksiyonunu kullanmanız gerekir. Şimdi örnek üzerinden anlatalım:
 ```python
-words = dizge.standardize(data)
+words = standardize(data)
 ```
 
 ### `competence` Modülü Fonksiyonları
 **dizge**'nin içinde Türkçenin ses dizgesine ait bazı bilgiler Nesne Tabanlı Programlama mantığıyla eklenmiştir. Bu bilgilere ulaşım oldukça kolaydır. Örneğin ünlü veya ünsüzlerin dökümünü aşağıdaki gibi bir kod ile alabilirsiniz:
 ```python
-for i in [vars(phoneme) for phoneme in dizge.vowels]:
+for i in [vars(phoneme) for phoneme in vowels]:
     print(i)
 
-for i in [vars(phoneme) for phoneme in dixge.consonants]:
+for i in [vars(phoneme) for phoneme in consonants]:
     print(i)
 ```
 
@@ -52,40 +50,40 @@ Aynı zamanda bir sesin, edinçteki özelliklerini sorgulayabileceğiniz fonksiy
 ### `tools` Modülü Fonksiyonları
 Bu modülde G2P ve seslem analizi gibi sesbilimsel süreçler ile ilgili bazı fonksiyonlar bulunmaktadır. Bunları yukarıda hazır hale gelirdiğimiz veri üzerinde tek tek yapabileceğimiz gibi bir sonraki başlıkta anlatacağımız çözümleyici aracıyla toplu bir şekilde de yapabilirsiniz.
 
-Türkçede <ğ> yazıbiriminin sesel karşılığının olmaması nedeniyle, bu yazıbirim ünlü kayması, uzama gibi çeşitli görevler üstlenmektedir. Paketimizdeki `softG()` fonksiyonu <ğ> yazıbiriminin gerçekleşme biçimlerini göstermektedir. 
+Türkçede <ğ> yazıbiriminin sessel karşılığının olmaması nedeniyle, bu yazıbirim ünlü kayması, uzama gibi çeşitli görevler üstlenmektedir. Paketimizdeki `softG()` fonksiyonu <ğ> yazıbiriminin gerçekleşme biçimlerini göstermektedir. 
 
 ```python
->>> dizge.softG('dağ')
+>>> softG('dağ')
 'daː'
->>> dizge.softG('göğüs')
+>>> softG('göğüs')
 'göːüs'
->>> dizge.softG('eğlence')
+>>> softG('eğlence')
 'eylence'
 ```
 
 Bir sözcüğün seslem analizini farklı biçimlerde yapabilirsiniz. Örneğin, ortografi temelli olarak ve herhangi bir önişlem yapmadan gerçekleştirmek istiyorsanız `syllable_o()` fonksiyonunu kullanabilirsiniz.
 
 ```python
->>> dizge.syllable_o('afyonkarahisarlılaştıramadıklarımızdanmışçasına')
+>>> syllable_o('afyonkarahisarlılaştıramadıklarımızdanmışçasına')
 ['af', 'yon', 'ka', 'ra', 'hi', 'sar', 'lı', 'laş', 'tı', 'ra', 'ma', 'dık', 'la', 'rı', 'mız', 'dan', 'mış', 'ça', 'sı', 'na']
 ```
 
 Seslem analizini fonetik temelli yapmak isterseniz `syllable_p()` fonksiyonunu kullanabilirsiniz.
 ```python
->>> dizge.syllable_p('afyonkarahisarlılaştıramadıklarımızdanmışçasına')
+>>> syllable_p('afyonkarahisarlılaştıramadıklarımızdanmışçasına')
 [('ɑf', 'VC'), ('jɔŋ', 'CVC'), ('kɑ', 'CV'), ('ɾɑ', 'CV'), ('çI', 'CV'), ('sɑɾ', 'CVC'), ('łɨ', 'CV'), ('łɑʃ', 'CVC'), ('tɨ', 'CV'), ('ɾɑ', 'CV'), ('mɑ', 'CV'), ('dɨk', 'CVC'), ('łɑ', 'CV'), ('ɾɨ', 'CV'), ('mɨz', 'CVC'), ('dɑn', 'CVC'), ('mɨʃ', 'CVC'), ('tʃɑ', 'CV'), ('sɨ', 'CV'), ('nɑ', 'CV')]
 ```
 
 Yukarıdaki analizde hangi seslem örüntüsünden kaç tane olduğunu hesaplamak için `countSyllable()` fonksiyonunu kullanabilirsiniz.
 ```python
->>> dizge.countSyllable('afyonkarahisarlılaştıramadıklarımızdanmışçasına')
+>>> countSyllable('afyonkarahisarlılaştıramadıklarımızdanmışçasına')
 {'VC': 1, 'CVC': 7, 'CV': 12}
 ```
 
 Kütüphanenin sesbilimsel araştırmalara sunacağını düşündüğümüz en büyük katkı da kararlı bir G2P (grapheme-to-phoneme) fonksiyonu sayesinde çevriyazı sunmasıdır. Bunun için `g2p()` fonksiyonu kullanılabilir.
 
 ```python
->>> dizge.g2p('afyonkarahisarlılaştıramadıklarımızdanmışçasına')
+>>> g2p('afyonkarahisarlılaştıramadıklarımızdanmışçasına')
 'ɑfjɔŋkɑɾɑçIsɑɾłɨłɑʃtɨɾɑmɑdɨkłɑɾɨmɨzdɑnmɨʃtʃɑsɨnɑ'
 ```
 
@@ -97,7 +95,7 @@ Bir önceki başlıkta anlatılan araçlardan bir veya birkaçını bir veri set
 
 ```python
 >>> words = ["ankara", "dil", "bilim", "dilbilim"]
->>> result = dizge.analyze(words, ["g2p", "syllable_o", "syllable_p", "countSylable", "harmony"])
+>>> result = analyze(words, ["g2p", "syllable_o", "syllable_p", "countSyllable", "harmony"])
 
 ```
 
