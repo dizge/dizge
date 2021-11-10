@@ -43,22 +43,3 @@ loans = {
     "lamba": [["a", 1]],
     "kip": [["k", 0]]
     }
-
-# loans2 = {
-#     "alaka": "\u0251\u0142a\u02D0k\u0251",
-#     "hakim": "x\u0251\u02D0cIm",
-#     "memur": "me\u02D0mU\u0263",
-#     "temin": "t\u02B0e\u02D0mIn",
-#     "tecil": "t\u02B0e\u02D0d\u0292Il",
-#     "tesir": "t\u02B0e\u02D0sI\u0263",
-#     "itibaren": "i\u02D0tIb\u0251r\u025Bn",
-#     "ilan": "i\u02D0\u0142an",
-#     "lider": "li\u02D0d\u025B\u0263",
-#     "muaf": "mu\u02D0\u0251f",
-#     "ödlek": "\u0153tl\u025Bc",
-#     "tahin": "t\u02B0\u0251\u02D0çIn",
-#     "nisan": "ni\u02D0s\u0251n",
-#     "niçin": "ni\u02D0t\u0283In",
-#     "rakım": "r\u0251\u02D0k\u0268m",
-#     "lüfer": "ly\u02D0f\u025B\u0263"
-#     }

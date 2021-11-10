@@ -22,8 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import dizge.tools.phonology as tp
-
+from dizge import *
 
 # PHONOLOGICAL STRUCTURES
 class Phoneme:
@@ -184,14 +183,6 @@ class Vowel(Phoneme):
             return "arkadil"  # back
         else:
             return "hata"  # error
-
-    # def getHeight(self):
-    #     if self.height == 0:
-    #         return "alçak" # low
-    #     elif self.height == 1:
-    #         return "yüksek" # high
-    #     else:
-    #         return "hata" # error
 
 
 # PHONOLOGICAL UNITS
@@ -640,7 +631,7 @@ def isFinalWord(syllableCounter, phonemeCounter, seq):
     length = 0
     for syl in seq:
         length += len(syl)
-    currentIndex = tp.findMyIndex(syllableCounter, phonemeCounter, seq)
+    currentIndex = findMyIndex(syllableCounter, phonemeCounter, seq)
     if length - 1 == currentIndex:
         return True
     else:
