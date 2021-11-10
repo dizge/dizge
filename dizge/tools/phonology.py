@@ -22,8 +22,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-import dizge.competence.phonology as p
-import dizge.competence.lexicon as lex
+from dizge import *
 
 # NORMALIZATION
 normalizationChars = {
@@ -70,9 +69,6 @@ loanSignals = {
     "û": "ü"
 }
 
-
-#
-
 def softG(word):
     """
 
@@ -94,17 +90,17 @@ def softG(word):
             word2 = word2.replace("ğ", "\u02D0", 1)
         elif "yığıl" in word2:
             word2 = word2.replace("yığıl", "yıoul", 1)
-        elif p.isVowel(word2[previousP]) and p.isVowel(word2[nextP]):
-            if (p.isUnrounded(word2[previousP]) and p.isFront(word2[previousP])) and (
-                    p.isUnrounded(word2[nextP]) and p.isFront(word2[nextP])):
+        elif isVowel(word2[previousP]) and isVowel(word2[nextP]):
+            if (isUnrounded(word2[previousP]) and isFront(word2[previousP])) and (
+                    isUnrounded(word2[nextP]) and isFront(word2[nextP])):
                 word2 = word2.replace("ğ", "y", 1)
             elif word2[previousP] == word2[nextP]:
                 word2 = word2.replace("ğ", "\u02D0", 1)
                 word2 = word2[:nextP] + word2[nextP + 1:]
             elif word2[previousP] != word2[nextP]:
                 word2 = word2.replace("ğ", "\u02D0", 1)
-        elif p.isVowel(word2[previousP]) and p.isConsonant(word2[nextP]):
-            if p.isUnrounded(word2[previousP]) and p.isFront(word2[previousP]):
+        elif isVowel(word2[previousP]) and isConsonant(word2[nextP]):
+            if isUnrounded(word2[previousP]) and isFront(word2[previousP]):
                 word2 = word2.replace("ğ", "y", 1)
             else:
                 word2 = word2.replace("ğ", "\u02D0", 1)
@@ -174,10 +170,10 @@ def syllable_o(word, mode="human"):
 
     seq = list(normalize(word, mode)[0])
     for i in range(len(seq) - 1, -1, -1):
-        if seq[i] in [v.grapheme for v in p.vowels]:
+        if seq[i] in [v.grapheme for v in vowels]:
             if (i - 1) <= 0:
                 continue
-            elif seq[i - 1] in [v.grapheme for v in p.vowels]:
+            elif seq[i - 1] in [v.grapheme for v in vowels]:
                 continue
             else:
                 seq[i - 1] = "." + seq[i - 1]
@@ -333,7 +329,7 @@ def g2p(word):
                 output += "\u02D0"
 
             elif phoneme == "p":
-                if p.isInitialWord(syllableCounter, phonemeCounter):
+                if isInitialWord(syllableCounter, phonemeCounter):
                     output += "p\u02B0"
                 else:
                     output += "p"
@@ -342,7 +338,7 @@ def g2p(word):
                 output += "b"
 
             elif phoneme == "t":
-                if p.isInitialWord(syllableCounter, phonemeCounter):
+                if isInitialWord(syllableCounter, phonemeCounter):
                     output += "t\u02B0"
                 else:
                     output += "t"
@@ -351,15 +347,15 @@ def g2p(word):
                 output += "d"
 
             elif phoneme == "k":
-                if p.getTongueSyllable(syl) == 1:
+                if getTongueSyllable(syl) == 1:
                     output += "c"
                 else:
                     output += "k"
-                if p.isInitialWord(syllableCounter, phonemeCounter):
+                if isInitialWord(syllableCounter, phonemeCounter):
                     output += "\u02B0"
 
             elif phoneme == "g":
-                if p.getTongueSyllable(syl) == 1:
+                if getTongueSyllable(syl) == 1:
                     output += "\u025F"
                 else:
                     output += "g"
@@ -368,13 +364,13 @@ def g2p(word):
                 output += "f"
 
             elif phoneme == "v":
-                if p.isInitialWord(syllableCounter, phonemeCounter) == False and p.isFinalWord(syllableCounter,
+                if isInitialWord(syllableCounter, phonemeCounter) == False and isFinalWord(syllableCounter,
                                                                                                phonemeCounter,
                                                                                                seq) == False:
                     indexV = findMyIndex(syllableCounter, phonemeCounter, seq)
                     previousP = indexV - 1
                     nextP = indexV + 1
-                    if p.isVowel(word[previousP]) and p.isVowel(word[nextP]):
+                    if isVowel(word[previousP]) and isVowel(word[nextP]):
                         output += "\u028B"
                     else:
                         output += "v"
@@ -385,7 +381,7 @@ def g2p(word):
                 output += "s"
 
             elif phoneme == "z":
-                if p.isFinalWord(syllableCounter, phonemeCounter, seq):
+                if isFinalWord(syllableCounter, phonemeCounter, seq):
                     output += "z\u0325"
                 else:
                     output += "z"
@@ -403,7 +399,7 @@ def g2p(word):
                 output += "d\u0292"
 
             elif phoneme == "h":
-                if p.getTongueSyllable(syl) == 1:
+                if getTongueSyllable(syl) == 1:
                     output += "ç"
                 else:
                     output += "x"
@@ -415,7 +411,7 @@ def g2p(word):
                 output += "m"
 
             elif phoneme == "n":
-                if p.isFinalWord(syllableCounter, phonemeCounter, seq):
+                if isFinalWord(syllableCounter, phonemeCounter, seq):
                     output += "n"
                 else:
                     indexN = findMyIndex(syllableCounter, phonemeCounter, seq)
@@ -428,16 +424,16 @@ def g2p(word):
                         output += "n"
 
             elif phoneme == "r":
-                if p.isInitialWord(syllableCounter, phonemeCounter):
+                if isInitialWord(syllableCounter, phonemeCounter):
                     output += "r"
-                elif p.isFinalWord(syllableCounter, phonemeCounter, seq):
+                elif isFinalWord(syllableCounter, phonemeCounter, seq):
                     output += "\u0263"
                 else:
                     output += "\u027e"
 
             elif phoneme == "l":
-                if p.getTongueSyllable(syl) == 1 or (
-                        p.getTongueSyllable(syl) == 3 and p.isInitialWord(syllableCounter, phonemeCounter)):
+                if getTongueSyllable(syl) == 1 or (
+                        getTongueSyllable(syl) == 3 and isInitialWord(syllableCounter, phonemeCounter)):
                     output += "l"
                 elif word == "gol":
                     output += "l"
@@ -464,7 +460,7 @@ def g2p(word):
             elif phoneme == "o":
                 indexO = findMyIndex(syllableCounter, phonemeCounter, seq)
                 nextO = indexO + 1
-                if p.isFinalWord(syllableCounter, phonemeCounter, seq) == False:
+                if isFinalWord(syllableCounter, phonemeCounter, seq) == False:
                     if word[nextO] == "ğ":
                         output += "o"
                     else:
@@ -481,7 +477,7 @@ def g2p(word):
             elif phoneme == "i":
                 indexİ = findMyIndex(syllableCounter, phonemeCounter, seq)
                 nextİ = indexİ + 1
-                if p.isFinalWord(syllableCounter, phonemeCounter, seq) == False:
+                if isFinalWord(syllableCounter, phonemeCounter, seq) == False:
                     if word[nextİ] == "ğ":
                         output += "\u0069"
                     else:
@@ -495,7 +491,7 @@ def g2p(word):
             elif phoneme == "u":
                 indexU = findMyIndex(syllableCounter, phonemeCounter, seq)
                 nextU = indexU + 1
-                if p.isFinalWord(syllableCounter, phonemeCounter, seq) == False:
+                if isFinalWord(syllableCounter, phonemeCounter, seq) == False:
                     if word[nextU] == "ğ":
                         output += "u"
                     else:
@@ -509,7 +505,7 @@ def g2p(word):
             elif phoneme == "ü":
                 indexÜ = findMyIndex(syllableCounter, phonemeCounter, seq)
                 nextÜ = indexÜ + 1
-                if p.isFinalWord(syllableCounter, phonemeCounter, seq) == False:
+                if isFinalWord(syllableCounter, phonemeCounter, seq) == False:
                     if word[nextÜ] == "ğ":
                         output += "y"
                     else:
@@ -579,7 +575,7 @@ def g2p(word):
         return output
 
 
-def vowelHarmony(word):
+def harmony(word):
     """
 
     :param word:
@@ -593,9 +589,9 @@ def vowelHarmony(word):
         """
         pattern = []
         for phoneme in word:
-            if p.isBack(phoneme):
+            if isBack(phoneme):
                 pattern += "B"
-            elif p.isFront(phoneme):
+            elif isFront(phoneme):
                 pattern += "F"
             else:
                 continue
@@ -614,7 +610,7 @@ def vowelHarmony(word):
 
         pattern = []
         for phoneme in word:
-            if p.isVowel(phoneme):
+            if isVowel(phoneme):
                 pattern += phoneme
             else:
                 continue
@@ -624,10 +620,10 @@ def vowelHarmony(word):
             idxList.append([idx, idx + 1])
 
         for i in idxList:
-            if p.isUnrounded(pattern[i[0]]) and p.isUnrounded(pattern[i[1]]):
+            if isUnrounded(pattern[i[0]]) and isUnrounded(pattern[i[1]]):
                 result = True
-            elif p.isRounded(pattern[i[0]]) and ((p.isRounded(pattern[i[1]]) and p.isClose(pattern[i[1]])) or (
-                    p.isUnrounded(pattern[i[1]]) and p.isOpen(pattern[i[1]]))):
+            elif isRounded(pattern[i[0]]) and ((isRounded(pattern[i[1]]) and isClose(pattern[i[1]])) or (
+                    isUnrounded(pattern[i[1]]) and isOpen(pattern[i[1]]))):
                 result = True
             else:
                 result = False
