@@ -1,198 +1,174 @@
 # -*- coding: utf-8 -*-
 
-# MIT License
-#
-# Copyright (c) 2021 Mehmet Umut Mutlu, Nazlıcan Yetimaslan, İlker Atagun
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in all
-# copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
-import dizge.tools.phonology as tp
-
+import dizge.tools as tools
 
 # PHONOLOGICAL STRUCTURES
 class Phoneme:
+    """Representing the phonemes in the linguistic competence of an ideal native speaker
+
+    Args:
+        phonemeID (str): An unique ID for each phoneme
+        grapheme (str): The grapheme for each phoneme
     """
 
-    """
-    def __init__(self, phonemeID, grapheme):
-        """
+    def __init__(self, phonemeID: str, grapheme: str):
+        """Representing the phonemes in the linguistic competence of an ideal native speaker
 
-        :param phonemeID:
-        :param grapheme:
+        Args:
+            phonemeID (str): An unique ID for each phoneme
+            grapheme (str): The grapheme for each phoneme
         """
-        self.phonemeID = phonemeID  # her bir sesbirime ait benzersiz kimlik
-        self.grapheme = grapheme  # yazıbirim
-
+        self.phonemeID = phonemeID
+        self.grapheme = grapheme
 
 class Consonant(Phoneme):
+    """Representing the consonants in the linguistic competence of an ideal native speaker
+
+    Args:
+        phonemeID (str): An unique ID for each phoneme
+        grapheme (str): The grapheme for each phoneme
+        manner (int): The manner value of the phoneme according to IPA
+        place (int): The place value of the phoneme according to IPA
+        voicing (int): The voicing value of the phoneme according to IPA
     """
 
-    """
-    def __init__(self, phonemeID, grapheme, manner, place, voicing):
-        """
+    def __init__(self, phonemeID: str, grapheme: str, manner: int, place: int, voicing: int):
+        """Representing the consonants in the linguistic competence of an ideal native speaker
 
-        :param phonemeID:
-        :param grapheme:
-        :param manner:
-        :param place:
-        :param voicing:
+        Args:
+            phonemeID (str): An unique ID for each phoneme
+            grapheme (str): The grapheme for each phoneme
+            manner (int): The manner value of the phoneme according to IPA
+            place (int): The place value of the phoneme according to IPA
+            voicing (int): The voicing value of the phoneme according to IPA
         """
         Phoneme.__init__(self, phonemeID, grapheme)
-        self.manner = manner  # çıkış biçimi
-        self.place = place  # çıkış yeri
-        self.voicing = voicing  # ötümlülük
+        self.manner = manner
+        self.place = place
+        self.voicing = voicing
 
     def getManner(self):
-        """
+        """It returns the manner info."""
 
-        :return:
-        """
         if self.manner == 1:
-            return "patlamalı"  # plosive
+            return "plosive"
         elif self.manner == 2:
-            return "genizsil"  # nasal
+            return "nasal"
         elif self.manner == 3:
-            return "titrek"  # trill
+            return "trill"
         elif self.manner == 4:
-            return "dokunmalı veya çarpmalı"  # tap or flap
+            return "tap or flap"
         elif self.manner == 5:
-            return "sürtünmeli"  # fricative
+            return "fricative"
         elif self.manner == 6:
-            return "yan sürtünmeli"  # lateral fricative
+            return "lateral fricative"
         elif self.manner == 7:
-            return "sürtünmesiz"  # approximant
+            return "approximant"
         elif self.manner == 8:
-            return "yan sürtünmesiz"  # lateral approximant
+            return "lateral approximant"
         else:
-            return "hata"  # error
+            return "error"
 
     def getPlace(self):
-        """
+        """It returns the place info."""
 
-        :return:
-        """
         if self.place == 1:
-            return "çift-dudaksıl"  # bilabial
+            return "bilabial"
         elif self.place == 2:
-            return "dişsil-dudaksıl"  # labiodental
+            return "labiodental"
         elif self.place == 3:
-            return "dişsil"  # dental
+            return "dental"
         elif self.place == 4:
-            return "diş-yuvasıl"  # alveolar
+            return "alveolar"
         elif self.place == 5:
-            return "artdiş-yuvasıl"  # postalveolar
+            return "postalveolar"
         elif self.place == 6:
-            return "üstdamaksıl"  # retroflex
+            return "retroflex"
         elif self.place == 7:
-            return "damaksıl"  # palatal
+            return "palatal"
         elif self.place == 8:
-            return "artdamaksıl"  # velar
+            return "velar"
         elif self.place == 9:
-            return "küçük-dilsil"  # uvular
+            return "uvular"
         elif self.place == 10:
-            return "yutaksıl"  # pharyngeal
+            return "pharyngeal"
         elif self.place == 11:
-            return "gırtlaksıl"  # glottal
+            return "glottal"
         else:
-            return "hata"  # error
+            return "error"
 
     def getVoicing(self):
-        """
+        """It returns the voicing info."""
 
-        :return:
-        """
         if self.voicing == 0:
-            return "ötümsüz"  # voiceless
+            return "voiceless"
         elif self.voicing == 1:
-            return "ötümlü"  # voiced
+            return "voiced"
         else:
-            return "hata"  # error
-
+            return "error"
 
 class Vowel(Phoneme):
+    """Representing the vowels in the linguistic competence of an ideal native speaker
+
+    Args:
+        phonemeID (str): An unique ID for each phoneme
+        grapheme (str): The grapheme for each phoneme
+        rounding (int): The rounding value of the phoneme according to IPA
+        mandible (int): The mandible value of the phoneme according to IPA
+        tongue (int): The tongue value of the phoneme according to IPA
     """
 
-    """
-    def __init__(self, phonemeID, grapheme, rounding, mandible, tongue):
-        """
+    def __init__(self, phonemeID: str, grapheme: str, rounding: int, mandible: int, tongue: int):
+        """Representing the vowels in the linguistic competence of an ideal native speaker
 
-        :param phonemeID:
-        :param grapheme:
-        :param rounding:
-        :param mandible:
-        :param tongue:
+        Args:
+            phonemeID (str): An unique ID for each phoneme
+            grapheme (str): The grapheme for each phoneme
+            rounding (int): The rounding value of the phoneme according to IPA
+            mandible (int): The mandible value of the phoneme according to IPA
+            tongue (int): The tongue value of the phoneme according to IPA
         """
+         
         Phoneme.__init__(self, phonemeID, grapheme)
         self.rounding = rounding
         self.mandible = mandible
         self.tongue = tongue
 
     def getRounding(self):
-        """
+        """It returns the rounding info."""
 
-        :return:
-        """
         if self.rounding == 0:
-            return "düz"  # unrounded
+            return "unrounded"
         elif self.rounding == 1:
-            return "yuvarlak"  # rounded
+            return "rounded"
         else:
-            return "hata"  # error
+            return "error"
 
     def getMandible(self):
-        """
+        """It returns the mandible info."""
 
-        :return:
-        """
         if self.mandible == 1:
-            return "kapalı"  # close
+            return "close"
         elif self.mandible == 2:
-            return "yarı-kapalı"  # close-mid
+            return "close-mid"
         elif self.mandible == 3:
-            return "yarı-açık"  # open-mid
+            return "open-mid"
         elif self.mandible == 4:
-            return "açık"  # open
+            return "open"
         else:
-            return "hata"  # error
+            return "error"
 
     def getTongue(self):
-        """
+        """It returns the tongue info."""
 
-        :return:
-        """
         if self.tongue == 1:
-            return "öndil"  # front
+            return "front"
         elif self.tongue == 2:
-            return "ortadil"  # central
+            return "central"
         elif self.tongue == 3:
-            return "arkadil"  # back
+            return "back"
         else:
-            return "hata"  # error
-
-    # def getHeight(self):
-    #     if self.height == 0:
-    #         return "alçak" # low
-    #     elif self.height == 1:
-    #         return "yüksek" # high
-    #     else:
-    #         return "hata" # error
-
+            return "error"
 
 # PHONOLOGICAL UNITS
 # VOWELS
@@ -230,429 +206,531 @@ c020 = Consonant("c020", "l", 8, 5, 1)
 consonants = [c001, c002, c003, c004, c005, c006, c007, c008, c009, c010,
               c011, c012, c013, c014, c015, c016, c017, c018, c019, c020]
 
+# FEATURE CHECK FUNCTIONS
+def isVowel(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is a vowel.
 
-# FEATURE FUNCTIONS
-def isVowel(phoneme):
-    """
+    Args:
+        phoneme (str): The phoneme you need to check
 
-    :param phoneme:
-    :return:
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
     if phoneme in [i.grapheme for i in vowels]:
         return True
     else:
         return False
 
+def isUnrounded(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is unrounded.
 
-def isUnrounded(phoneme):
-    """
+    Args:
+        phoneme (str): The phoneme you need to check
 
-    :param phoneme:
-    :return:
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
     if [i.rounding for i in vowels if i.grapheme == phoneme] == [0]:
         return True
     else:
         return False
 
+def isRounded(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is rounded.
 
-def isRounded(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.rounding for i in vowels if i.grapheme == phoneme] == [1]:
         return True
     else:
         return False
 
+def isClose(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is a close vowel.
 
-def isClose(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.mandible for i in vowels if i.grapheme == phoneme] == [1]:
         return True
     else:
         return False
 
+def isCloseMid(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is a close-mid vowel.
 
-def isCloseMid(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.mandible for i in vowels if i.grapheme == phoneme] == [2]:
         return True
     else:
         return False
 
+def isOpenMid(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is a open-mid vowel.
 
-def isOpenMid(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.mandible for i in vowels if i.grapheme == phoneme] == [3]:
         return True
     else:
         return False
 
+def isOpen(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is a open vowel.
 
-def isOpen(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.mandible for i in vowels if i.grapheme == phoneme] == [4]:
         return True
     else:
         return False
 
+def isFront(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is a front vowel.
 
-def isFront(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.tongue for i in vowels if i.grapheme == phoneme] == [1]:
         return True
     else:
         return False
 
+def isCentral(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is a central vowel.
 
-def isCentral(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.tongue for i in vowels if i.grapheme == phoneme] == [2]:
         return True
     else:
         return False
 
+def isBack(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is a back vowel.
 
-def isBack(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.tongue for i in vowels if i.grapheme == phoneme] == [3]:
         return True
     else:
         return False
 
+def isConsonant(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is a consonant.
 
-def isConsonant(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if phoneme in [i.grapheme for i in consonants]:
         return True
     else:
         return False
 
+def isPlosive(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is a plosive consonant.
 
-def isPlosive(phoneme):
-    """
+    Args:
+        phoneme (str): The phoneme you need to check
 
-    :param phoneme:
-    :return:
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
     if [i.manner for i in consonants if i.grapheme == phoneme] == [1]:
         return True
     else:
         return False
 
+def isNasal(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is a nasal consonant.
 
-def isNasal(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.manner for i in consonants if i.grapheme == phoneme] == [2]:
         return True
     else:
         return False
 
+def isTrill(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is a trilled consonant.
 
-def isTrill(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.manner for i in consonants if i.grapheme == phoneme] == [3]:
         return True
     else:
         return False
 
+def isTaporFlap(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is a tapped or flapped consonant.
 
-def isTaporFlap(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.manner for i in consonants if i.grapheme == phoneme] == [4]:
         return True
     else:
         return False
 
+def isFricative(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is a fricative consonant.
 
-def isFricative(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.manner for i in consonants if i.grapheme == phoneme] == [5]:
         return True
     else:
         return False
 
+def isLateralFricative(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is a lateral consonant.
 
-def isLateralFricative(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.manner for i in consonants if i.grapheme == phoneme] == [6]:
         return True
     else:
         return False
 
+def isApproximant(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is an approximant consonant.
 
-def isApproximant(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.manner for i in consonants if i.grapheme == phoneme] == [7]:
         return True
     else:
         return False
 
+def isLateralApproximant(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is a lateral approximant consonant.
 
-def isLateralApproximant(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.manner for i in consonants if i.grapheme == phoneme] == [8]:
         return True
     else:
         return False
 
+def isBilabial(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is a bilabial consonant.
 
-def isBilabial(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.place for i in consonants if i.grapheme == phoneme] == [1]:
         return True
     else:
         return False
 
+def isLabiodental(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is a labiodental consonant.
 
-def isLabiodental(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.place for i in consonants if i.grapheme == phoneme] == [2]:
         return True
     else:
         return False
 
+def isDental(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is a dental consonant.
 
-def isDental(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.place for i in consonants if i.grapheme == phoneme] == [3]:
         return True
     else:
         return False
 
+def isAlveolar(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is an alveolar consonant.
 
-def isAlveolar(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.place for i in consonants if i.grapheme == phoneme] == [4]:
         return True
     else:
         return False
 
+def isPostalveolar(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is a postalveolar consonant.
 
-def isPostalveolar(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.place for i in consonants if i.grapheme == phoneme] == [5]:
         return True
     else:
         return False
 
+def isRetroflex(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is a retroflex.
 
-def isRetroflex(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.place for i in consonants if i.grapheme == phoneme] == [6]:
         return True
     else:
         return False
 
+def isPalatal(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is a palatal consonant.
 
-def isPalatal(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.place for i in consonants if i.grapheme == phoneme] == [7]:
         return True
     else:
         return False
 
+def isVelar(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is a velar consonant.
 
-def isVelar(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.place for i in consonants if i.grapheme == phoneme] == [8]:
         return True
     else:
         return False
 
+def isUvular(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is an uvular consonant.
 
-def isUvular(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.place for i in consonants if i.grapheme == phoneme] == [9]:
         return True
     else:
         return False
 
+def isPharyngeal(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is a pharyngeal consonant.
 
-def isPharyngeal(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.place for i in consonants if i.grapheme == phoneme] == [10]:
         return True
     else:
         return False
 
+def isGlottal(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is a glottal consonant.
 
-def isGlottal(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.place for i in consonants if i.grapheme == phoneme] == [11]:
         return True
     else:
         return False
 
+def isVoiced(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is voiced.
 
-def isVoiced(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.voicing for i in consonants if i.grapheme == phoneme] == [1]:
         return True
     else:
         return False
 
+def isVoiceless(phoneme: str):
+    """It takes a phoneme as a grapheme value and checks if it is voiceless.
 
-def isVoiceless(phoneme):
+    Args:
+        phoneme (str): The phoneme you need to check
+
+    Returns:
+        bool: True if the phoneme has the feature; otherwise, False
     """
 
-    :param phoneme:
-    :return:
-    """
     if [i.voicing for i in consonants if i.grapheme == phoneme] == [0]:
         return True
     else:
         return False
 
+def isInitialWord(syllableCounter: int, phonemeCounter: int):
+    """It takes the counts of syllables and phonemes and returns if it's on the initial position of the word.
 
-def isInitialWord(syllableCounter, phonemeCounter):
-    """
+    Args:
+        syllableCounter (int): The count of the syllable
+        phonemeCounter (int): The count of the phoneme
 
-    :param syllableCounter:
-    :param phonemeCounter:
-    :return:
+    Returns:
+        bool: True if it's on the initial position of the word; otherwise, False
     """
+    
     if syllableCounter == 1 and phonemeCounter == 1:
         return True
     else:
         return False
 
+def isFinalWord(syllableCounter: int, phonemeCounter: int, seq: list):
+    """It takes the counts of syllables and phonemes, and the sequence and returns if it's on the final position of the word.
 
-def isFinalWord(syllableCounter, phonemeCounter, seq):
+    Args:
+        syllableCounter (int): The count of the syllable
+        phonemeCounter (int): The count of the phoneme
+        seq (list): The sequence of the word
+
+    Returns:
+        bool: True if it's on the final position of the word; otherwise, False
     """
 
-    :param syllableCounter:
-    :param phonemeCounter:
-    :param seq:
-    :return:
-    """
     length = 0
     for syl in seq:
         length += len(syl)
-    currentIndex = tp.findMyIndex(syllableCounter, phonemeCounter, seq)
+    currentIndex = tools.findMyIndex(syllableCounter, phonemeCounter, seq)
     if length - 1 == currentIndex:
         return True
     else:
         return False
 
+def getTongueSyllable(syllable: str):
+    """It takes the syllable and returns if it has front or back vowels.
 
-def getTongueSyllable(syllable):
+    Args:
+        syllable (str): The syllable you need to snalyze
+
+    Returns:
+        list: The tongue values of the vowels in the syllable
     """
 
-    :param syllable:
-    :return:
-    """
     for phoneme in syllable:
         if isVowel(phoneme):
             feature = [i.tongue for i in vowels if i.grapheme == phoneme][0]
