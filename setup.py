@@ -9,7 +9,7 @@ README = (HERE / "README.md").read_text(encoding="utf-8")
 
 # This call to setup() does all the work
 setup(
-    name="Dizge",
+    name="dizge",
     version="0.1.5",
     description="The grammar analyzer for Turkish",
     long_description=README,

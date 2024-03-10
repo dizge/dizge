@@ -156,6 +156,7 @@ def syllable_o(word: str, mode: str ="human"):
             str: The pattern of vowels and consonants
         """
 
+        seq = ""
         for phoneme in syl:
             if phoneme in vowels:
                 seq += "V"
@@ -293,7 +294,7 @@ def syllable_p(word: str):
     return list(zip(analyzedWord, analyzedWord_seq))
 
 
-def __findMyIndex(syllableCounter: int, phonemeCounter: int, seq: list):
+def findMyIndex(syllableCounter: int, phonemeCounter: int, seq: list):
     """It takes syllable and phoneme counts and the sylable piece and returns of the position of the unit.
 
     Args:
@@ -384,7 +385,7 @@ def g2p(word: str):
                 if phonology.isInitialWord(syllableCounter, phonemeCounter) == False and phonology.isFinalWord(syllableCounter,
                                                                                                phonemeCounter,
                                                                                                seq) == False:
-                    indexV = __findMyIndex(syllableCounter, phonemeCounter, seq)
+                    indexV = findMyIndex(syllableCounter, phonemeCounter, seq)
                     previousP = indexV - 1
                     nextP = indexV + 1
                     if phonology.isVowel(word[previousP]) and phonology.isVowel(word[nextP]):
@@ -431,7 +432,7 @@ def g2p(word: str):
                 if phonology.isFinalWord(syllableCounter, phonemeCounter, seq):
                     output += "n"
                 else:
-                    indexN = __findMyIndex(syllableCounter, phonemeCounter, seq)
+                    indexN = findMyIndex(syllableCounter, phonemeCounter, seq)
                     nextN = indexN + 1
                     if word[nextN] in ["v", "f", "k"] and word in ["cankurtaran", "enfes", "erkenvarmak", "envanter"]:
                         output += "\u0271"
@@ -475,7 +476,7 @@ def g2p(word: str):
                         output += "e"
 
             elif phoneme == "o":
-                indexO = __findMyIndex(syllableCounter, phonemeCounter, seq)
+                indexO = findMyIndex(syllableCounter, phonemeCounter, seq)
                 nextO = indexO + 1
                 if phonology.isFinalWord(syllableCounter, phonemeCounter, seq) == False:
                     if word[nextO] == "ğ":
@@ -492,7 +493,7 @@ def g2p(word: str):
                     output += "\u0153"
 
             elif phoneme == "i":
-                indexİ = __findMyIndex(syllableCounter, phonemeCounter, seq)
+                indexİ = findMyIndex(syllableCounter, phonemeCounter, seq)
                 nextİ = indexİ + 1
                 if phonology.isFinalWord(syllableCounter, phonemeCounter, seq) == False:
                     if word[nextİ] == "ğ":
@@ -506,7 +507,7 @@ def g2p(word: str):
                 output += "\u0268"
 
             elif phoneme == "u":
-                indexU = __findMyIndex(syllableCounter, phonemeCounter, seq)
+                indexU = findMyIndex(syllableCounter, phonemeCounter, seq)
                 nextU = indexU + 1
                 if phonology.isFinalWord(syllableCounter, phonemeCounter, seq) == False:
                     if word[nextU] == "ğ":
@@ -520,7 +521,7 @@ def g2p(word: str):
                         output += "u"
 
             elif phoneme == "ü":
-                indexÜ = __findMyIndex(syllableCounter, phonemeCounter, seq)
+                indexÜ = findMyIndex(syllableCounter, phonemeCounter, seq)
                 nextÜ = indexÜ + 1
                 if phonology.isFinalWord(syllableCounter, phonemeCounter, seq) == False:
                     if word[nextÜ] == "ğ":
