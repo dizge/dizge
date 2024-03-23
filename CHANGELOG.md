@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.6] - 2024-03-23
+### Fixed
+- Minor bug fixes
+
 ## [0.1.5] - 2024-03-10
 ### Added
 - Docstrings for all the parts
@@ -36,6 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - syllable_o and syllable_p functions
 - countSyllable function
 
+[0.1.6]: https://pypi.org/project/dizge/0.1.6/
 [0.1.5]: https://pypi.org/project/dizge/0.1.5/
 [0.1.4]: https://pypi.org/project/dizge/0.1.4/
 [0.1.3]: https://pypi.org/project/dizge/0.1.3/

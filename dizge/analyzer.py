@@ -45,7 +45,7 @@ def analyze(data: list, selectedTools: list):
     dict = {
             'word': standardize(data)
             }
-    if "g2p" in mode:
+    if "g2p" in selectedTools:
         result = [tools.g2p(word) for word in data]
         dict["g2p"] = result
     if "syllable_o" in selectedTools:
